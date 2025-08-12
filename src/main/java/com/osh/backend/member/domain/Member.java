@@ -1,8 +1,7 @@
 package com.osh.backend.member.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +9,7 @@ import java.time.LocalDateTime;
  * 멤버 정보 Entity
  * 회원가입시 필요사항(이메일, 비밀번호, 이름, 연락처)
  */
+@Getter
 @Entity
 @Table(name = "members")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,6 +38,7 @@ public class Member {
     @Column(name = "member_withdrawalAt")
     private LocalDateTime memberWithdrawalAt;
 
+    @Builder
     public Member(String memberEmail, String memberPassword, String memberName, String memberMobile) {
         this.memberEmail = memberEmail;
         this.memberPassword = memberPassword;
