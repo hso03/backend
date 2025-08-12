@@ -23,4 +23,6 @@ public interface MemberServiceImpl {
 
     // D : 멤버 탈퇴(회원 번호)
     MemberResponse withdrawalMember(Long memberNo);
+
+    boolean login(String memberEmail, String memberPassword);
 }
