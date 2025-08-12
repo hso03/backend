@@ -46,7 +46,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/backend:latest
+        tags: hso03/backend:latest
 
   deploy:
     name: Deploy to EC2
@@ -61,7 +61,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: '22'
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/backend:latest
+            sudo docker pull hso03/backend:latest
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       - name: Update dependency graph
