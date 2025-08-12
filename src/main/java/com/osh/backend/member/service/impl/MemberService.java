@@ -22,7 +22,7 @@ public class MemberService implements MemberServiceImpl {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public MemberResponse registerMember(@Validated MemberRegisterRequest memberRegisterRequest) {
+    public MemberResponse registerMember(MemberRegisterRequest memberRegisterRequest) {
         String encodedPassword = passwordEncoder.encode(memberRegisterRequest.getMemberPassword());
 
         Member member = Member.builder()
