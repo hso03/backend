@@ -37,7 +37,7 @@ jobs:
     - name: Log in DockerHub #"도커 허브에 로그인"
       uses: docker/login-action@v3
       with:
-        username: ${{ sercrets.DOCKERHUB_USERNAME }}
+        username: ${{ sercrets.DOCKER_USERNAME }}
         password: ${{ sercrets.DOCKER_PASSWORD }}
 
     - name: "도커 이미지 빌드 및 푸쉬"
