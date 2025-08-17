@@ -32,6 +32,9 @@ public class Member {
     @Column(name = "member_mobile", unique = true, nullable = false)
     private String memberMobile;
 
+    @Column(name = "memeber_role")
+    private String role;
+
     @Column(name = "member_createAt")
     private LocalDateTime memberCreatedAt;
 
@@ -44,11 +47,17 @@ public class Member {
         this.memberPassword = memberPassword;
         this.memberName = memberName;
         this.memberMobile = memberMobile;
+        this.role = "ROLE_USER";
     }
 
     @PrePersist
     public void prePersist(){
         this.memberCreatedAt = LocalDateTime.now();
+    }
+
+    public boolean withDraw() {
+        this.memberWithdrawalAt = LocalDateTime.now();
+        return true;
     }
 
 }
