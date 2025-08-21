@@ -22,6 +22,8 @@ import java.util.Date;
 @Component
 public class JWTUtil {
 
+    private static final Long EXPIRED_MS = 60 * 60 * 10L;
+
     private final SecretKey secretKey;
 
     public JWTUtil(@Value("${spring.jwt.secret}") String secret) {
@@ -35,12 +37,12 @@ public class JWTUtil {
      * @param expiredMs 유효기간
      * @return 생성된 토큰 값
      */
-    public String generateJwt(String username, String role, Long expiredMs) {
+    public String generateJwt(String username, String role) {
         return Jwts.builder()
                 .claim("username", username)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiredMs))
+                .expiration(new Date(System.currentTimeMillis() + EXPIRED_MS))
                 .signWith(secretKey)
                 .compact();
     }
