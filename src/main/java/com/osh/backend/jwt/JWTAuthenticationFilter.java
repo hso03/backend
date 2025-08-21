@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * JWT 토큰의 유효기간이 남았는지 확인하는 필터
+ * 즉, JWT 유효성 검증 담당
  */
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
