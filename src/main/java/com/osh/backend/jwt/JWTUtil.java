@@ -22,7 +22,7 @@ import java.util.Date;
 @Component
 public class JWTUtil {
 
-    private static final Long EXPIRED_MS = 60 * 60 * 10L;
+    private static final Long EXPIRED_MS = 60 * 60 * 100L;
 
     private final SecretKey secretKey;
 
