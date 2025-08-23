@@ -22,9 +22,10 @@ public class MemberController {
         return ResponseEntity.ok(memberResponse);
     }
 
-    @GetMapping("/zz")
-    public ResponseEntity<String> getMember(){
-        return ResponseEntity.ok("zz");
+    @GetMapping("/{member-no}")
+    public ResponseEntity<MemberResponse> getMemberByNo(@PathVariable("member-no") Long memberNo){
+
+        return null;
     }
 
 }
