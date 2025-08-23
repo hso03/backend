@@ -2,6 +2,9 @@ package com.osh.backend.jwt;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +30,8 @@ public class JWTUtil {
     private final SecretKey secretKey;
 
     public JWTUtil(@Value("${spring.jwt.secret}") String secret) {
-        this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
+        this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
     /**
@@ -86,10 +90,10 @@ public class JWTUtil {
                     .verifyWith(secretKey)
                     .build()
                     .parseSignedClaims(token);
-            return true;
+            return false;
         } catch (Exception e) {
             log.error("JWT : {}", e.getMessage());
         }
-        return false;
+        return true;
     }
 }
