@@ -25,7 +25,7 @@ import java.util.Date;
 @Component
 public class JWTUtil {
 
-    private static final Long EXPIRED_MS = 60 * 60 * 100L;
+    private static final Long EXPIRED_MS = 60 * 60 * 1000L; // 1시간
 
     private final SecretKey secretKey;
 
