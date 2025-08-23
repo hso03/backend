@@ -1,5 +1,6 @@
 package com.osh.backend.member.service.impl;
 
+import com.osh.backend.advice.exception.MemberNotFoundException;
 import com.osh.backend.member.domain.Member;
 import com.osh.backend.member.dto.MemberRegisterRequest;
 import com.osh.backend.member.dto.MemberResponse;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +54,12 @@ public class MemberService implements MemberServiceImpl {
 
     @Override
     public MemberResponse getMember(Long memberNo) {
-        return null;
+        Optional<Member> optionalMember = memberRepository.findById(memberNo);
+        if(optionalMember.isEmpty()){
+            throw new MemberNotFoundException("멤버를 찾을 수 없습니다.");
+        }
+        Member member = optionalMember.get();
+        return converToMemberResponse(member);
     }
 
     @Override
@@ -80,6 +88,17 @@ public class MemberService implements MemberServiceImpl {
             // 비밀번호 불일치시 Exception
             throw new RuntimeException("비밀번호가 올바르지 않습니다.");
         }
+    }
+
+    private MemberResponse converToMemberResponse(Member member) {
+        return new MemberResponse(
+                member.getMemberNo(),
+                member.getMemberEmail(),
+                member.getMemberName(),
+                member.getMemberMobile(),
+                member.getMemberCreatedAt(),
+                member.getMemberWithdrawalAt()
+        );
     }
 
 }
