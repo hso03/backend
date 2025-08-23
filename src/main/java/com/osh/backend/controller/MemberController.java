@@ -22,10 +22,28 @@ public class MemberController {
         return ResponseEntity.ok(memberResponse);
     }
 
-    @GetMapping("/{member-no}")
+    @GetMapping("/memberNo/{member-no}")
     public ResponseEntity<MemberResponse> getMemberByNo(@PathVariable("member-no") Long memberNo){
+        MemberResponse memberResponse = memberService.getMember(memberNo);
+        return ResponseEntity.ok(memberResponse);
+    }
 
-        return null;
+    @GetMapping("/memberEmail/{member-email}")
+    public ResponseEntity<MemberResponse> getMemberByEmail(@PathVariable("member-email") String memberEmail){
+        MemberResponse memberResponse = memberService.getMember(memberEmail);
+        return ResponseEntity.ok(memberResponse);
+    }
+
+    @PutMapping("/memberNo/{member-no}")
+    public ResponseEntity<MemberResponse> updateMemberByNo(@PathVariable("member-no") Long memberNo){
+        MemberResponse memberResponse = memberService.getMember(memberNo);
+        return ResponseEntity.ok(memberResponse);
+    }
+
+    @PutMapping("/memberEmail/{member-email}")
+    public ResponseEntity<MemberResponse> updateMemberByEmail(@PathVariable("member-email") String memberEmail){
+        MemberResponse memberResponse = memberService.getMember(memberEmail);
+        return ResponseEntity.ok(memberResponse);
     }
 
 }
