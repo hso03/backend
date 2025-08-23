@@ -8,6 +8,7 @@ import com.osh.backend.member.dto.MemberUpdateRequest;
 import com.osh.backend.member.repository.MemberRepository;
 import com.osh.backend.member.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.model.internal.OptionalTableUpdate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +50,12 @@ public class MemberService implements MemberServiceImpl {
 
     @Override
     public MemberResponse getMember(String memberEmail) {
-        return null;
+        Optional<Member> optionalMember = memberRepository.findByMemberEmail(memberEmail);
+        if(optionalMember.isEmpty()){
+            throw new MemberNotFoundException("멤버를 찾을 수 없습니다.");
+        }
+        Member member = optionalMember.get();
+        return converToMemberResponse(member);
     }
 
     @Override
