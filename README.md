@@ -10,3 +10,7 @@ Spring Boot 기반으로 REST API를 제공하며, 사용자 인증과 데이터
 - MySQL 8
 - Docker
 - AWS EC2, RDS
+
+## 구현한 기능
+- Member CRUD
+- JWT Utils, Authentication
